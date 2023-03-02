@@ -84,7 +84,7 @@ def doSort(n, sortType, arrayType):
         else:
             print("Unsupported sort algorithm")
 
-        for i in range(n-2):
+        for i in range(n-1):
             if (A[i] > A[i+1]):
                 raise ValueError("Array not in order")
 

@@ -9,7 +9,9 @@ times = []
 for sortType in types:
     for arrayType in orders:
         for n in sizes:
-            times.append(timeit.timeit("doSort(n, sortType, arrayType)", setup="from __main__ import doSort, sortType, arrayType, n", number=repeats))
+            times.append(timeit.timeit("doSort(n, sortType, arrayType)",
+                                       setup="from __main__ import doSort, sortType, arrayType, n",
+                                       number=repeats))
 
 print("Sort Type\tArray Type\tSize\tTime")
 for i in range(len(types)):
