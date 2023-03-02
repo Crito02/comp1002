@@ -44,7 +44,19 @@ def insertionSort(A):
     return A
 
 def selectionSort(A):
-    ...
+    """ selectionsort
+    args:
+        A - an array to be sorted
+    returns:
+        A - the sorted array
+    """
+    for i in range(len(A)-1):
+        min = i
+        for j in range(i+1, len(A)-1):
+            if A[j] < A[min]:
+                min = j
+        A[i], A[min] = A[min], A[i]
+    return A
 
 def mergeSort(A):
     """ mergeSort - front-end for kick-starting the recursive algorithm

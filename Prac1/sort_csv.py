@@ -1,5 +1,4 @@
-import sys
-
+import numpy as np
 import DSAsorts
 
 class Student:
@@ -8,26 +7,40 @@ class Student:
         self.name = name
 
 
-def read_names(filename):
+def read_ids_to_array(filename):
+    f = open(filename, "r")
     try:
-        # Open a file
-        f = open(filename, "r")
-
-        # Read the file
         students = []
         for line in f:
-            line = line.strip()
-            parts = line.split(",")
-            students.append(Student(parts[0], parts[1]))
+            id, name = line.split(",")
+            students.append(Student(id, name))
     
     except Exception as e:
         print("Error: ", e)
     f.close()
+    
+    ids_array = np.zeros(len(students))
+    for i in range(len(ids_array)):
+        ids_array[i] = students[i].id
+    return ids_array
 
-    for s in students:
-        print(s.id, s.name)
-    return students
-
+def save_names(students):
+    f = open("output.csv", "w")
+    try:
+        print(len(students))
+        for i in range(len(students)):
+            print(students[i])
+            f.write(str(students[i])+"\n")
+    except Exception as e:
+        print("Error ", e)
+    f.close()
+    
 def main():
-    students = read_names(sys.argv[1])
-    bubble_sorted = DSAsorts.bubbleSort(students)
+    ids = read_ids_to_array("RandomNames7000(2).csv")
+    print(ids)
+    bubble_sorted = DSAsorts.bubbleSort(ids)
+    #print(bubble_sorted)
+    save_names(bubble_sorted)
+
+
+main()
