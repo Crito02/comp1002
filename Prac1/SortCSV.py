@@ -1,5 +1,4 @@
 import sys
-import argparse
 import numpy as np
 from DSAsorts import bubbleSortStudentObject,\
                      insertionSortStudentObject,\
@@ -57,9 +56,9 @@ def save_to_file(list, filename):
         print("Error ", e)
 
 
-def main(input_filename, output_filename, sort_type):
+def main(filename, sort_type):
     # Read ids from file
-    ids = read_ids_to_array_no_list(input_filename)
+    ids = read_ids_to_array_no_list(filename)
 
     # Sort ids
     if sort_type == "bubble":
@@ -73,28 +72,21 @@ def main(input_filename, output_filename, sort_type):
 
     for i in range(len(ids)-1):
         if ids[i].id > ids[i+1].id:
-            print("Error: Sort failed")
-            sys.exit(1)
-
-    # Save sorted ids to file
-    save_to_file(ids, output_filename)
+            raise ValueError("Sort failed")
 
 
 if __name__ == "__main__":
     # Take filename and sort type from command line
-    parser = argparse.ArgumentParser()
-    parser.add_argument("-f",
-                        "--input_filename",
-                        help="name of file to read")
-    parser.add_argument("-o",
-                        "--output_filename",
-                        help="name of file to write sorted CSV to",
-                        default="output.csv")
-    parser.add_argument("-s",
-                        "--sort_type",
-                        help="type of sort to use",
-                        choices=["bubble", "insertion", "selection"])
-    args = parser.parse_args()
+    if sys.argv[1] == "-h" or sys.argv[1] == "--help":
+        print("SortCSV.py <input_filename> <sort_type>")
+        sys.exit()
+    elif len(sys.argv) != 3:
+        print("Incorrect number of arguments, use -h or --help for help")
+        sys.exit()
+    elif sys.argv[2] not in ["bubble", "insertion", "selection"]:
+        print("Sort type not recognised, choose from: 'bubble', 'insertion'," \
+              + "'selection'")
+        sys.exit()
 
     # Call main function
-    main(args.input_filename, args.output_filename, args.sort_type)
+    main(sys.argv[1], sys.argv[2])
