@@ -84,32 +84,28 @@ def doSort(n, sortType, arrayType):
         else:
             print("Unsupported sort algorithm")
 
-        for i in range(n-1):
+        for i in range(n-2):
             if (A[i] > A[i+1]):
                 raise ValueError("Array not in order")
 
 #main program
-def main():
-    if len(sys.argv) < 3:
-        usage()
-    else:
-        for aa in range(2, len(sys.argv)):
-            
-            n = int(sys.argv[1])
-            sortType = sys.argv[aa][0]
-            arrayType = sys.argv[aa][1]
 
-            runningTotal = 0
-
-            for repeat in range(REPEATS):
-                startTime = timeit.default_timer()
-                doSort(n, sortType, arrayType)
-                endTime = timeit.default_timer()
-
-                runningTotal += (endTime - startTime)
+if len(sys.argv) < 3:
+    usage()
+else:
+    for aa in range(2, len(sys.argv)):
         
-            print(sortType + arrayType + " " + str(n) + " " + str(runningTotal/(REPEATS - 1)))
-            return runningTotal/(REPEATS - 1)
+        n = int(sys.argv[1])
+        sortType = sys.argv[aa][0]
+        arrayType = sys.argv[aa][1]
 
-if __name__ == "__main__":
-    main()
+        runningTotal = 0
+
+        for repeat in range(REPEATS):
+             startTime = timeit.default_timer()
+             doSort(n, sortType, arrayType)
+             endTime = timeit.default_timer()
+
+             runningTotal += (endTime - startTime)
+    
+        print(sortType + arrayType + " " + str(n) + " " + str(runningTotal/(REPEATS - 1)))

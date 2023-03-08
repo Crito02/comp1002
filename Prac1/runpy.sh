@@ -31,8 +31,8 @@
 # - n = ascending with 10% randomly swapped (ie: nearly sorted)
 #
 #sorts="br sr qr mr bn sn qn mn ba sa qa ma"
-#sorts="ba br bn bd"
-sorts="br"
+sorts="ba br bn bd ia ir in id sa sr sn sd"
+#sorts="br"
 
 # The "max" variable contains the maximum n that is passed to SortsTestHarness
 #max=8192
